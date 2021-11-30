@@ -7,7 +7,7 @@ musicPlay = True
 WIDTH = 1000
 HEIGHT = 1000
 window = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
-pygame.display.set_caption('ПингПонг')
+pygame.display.set_caption('Ping-Pong')
 clock = pygame.time.Clock()
 
 basicFont = pygame.font.SysFont(None, 70)
