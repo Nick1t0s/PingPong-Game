@@ -1,18 +1,22 @@
-import pygame, sys,random
+import pygame, sys,random,tkinter.filedialog
 from pygame.locals import *
 
 
 pygame.init()
+root = tkinter.Tk()
+root.withdraw()
+
 musicPlay = True
 WIDTH = 1000
 HEIGHT = 1000
+
 window = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
 pygame.display.set_caption('Ping-Pong')
 clock = pygame.time.Clock()
 
 basicFont = pygame.font.SysFont(None, 70)
 
-pygame.mixer.music.load('data/PingPongMusic01.mp3')
+pygame.mixer.music.load(tkinter.filedialog.askopenfilename())
 pygame.mixer.music.play(-1,0.0)
 
 DOWNLEFT = 'downleft'
@@ -79,7 +83,7 @@ while True:
             if event.key == K_RIGHT:
                 player2Right = False
                 player1Right = False
-            if event.key ==K_s:
+            if event.key == K_F1:
                 if musicPlay:
                     pygame.mixer.music.stop()
                 else:
@@ -177,4 +181,3 @@ while True:
 
     pygame.display.update()
     clock.tick(500)
-###############TDjyfuydfuyfdsiyu
