@@ -12,6 +12,8 @@ clock = pygame.time.Clock()
 
 basicFont = pygame.font.SysFont(None, 70)
 
+pygame.mixer.music.load('data/PingPongMusic01.mp3')
+pygame.mixer.music.play(-1,0.0)
 
 DOWNLEFT = 'downleft'
 DOWNRIGHT = 'downright'
