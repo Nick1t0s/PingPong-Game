@@ -1,8 +1,10 @@
 import pygame, sys,random,tkinter.filedialog
 from pygame.locals import *
+from pygame import mixer
 
 
 pygame.init()
+mixer.init()
 root = tkinter.Tk()
 root.withdraw()
 
@@ -16,8 +18,11 @@ clock = pygame.time.Clock()
 
 basicFont = pygame.font.SysFont(None, 70)
 
-pygame.mixer.music.load(tkinter.filedialog.askopenfilename())
-pygame.mixer.music.play(-1,0.0)
+#mixer.music.load(tkinter.filedialog.askopenfilename())
+#mixer.music.play(-1,0.0)
+
+roket = mixer.Sound("data/roket.mp3")
+wall = mixer.Sound("data/Desk.mp3")
 
 DOWNLEFT = 'downleft'
 DOWNRIGHT = 'downright'
@@ -89,6 +94,10 @@ while True:
                 else:
                     pygame.mixer.music.play(-1,0.0)
                 musicPlay = not musicPlay
+            if event.key == K_F2:
+                mixer.music.load(tkinter.filedialog.askopenfilename())
+                mixer.music.play(-1,0.0)
+
 
 
     window.fill((255,255,255))
@@ -113,6 +122,7 @@ while True:
             player2.left += 30
 
     if ball.colliderect(player1):
+        roket.play()
         score += 1
         if dir == DOWNLEFT:
             dir = UPLEFT
@@ -120,6 +130,7 @@ while True:
             dir = UPRIGHT
 
     if ball.colliderect(player2):
+        roket.play()
         score += 1
         if dir == UPLEFT:
             dir = DOWNLEFT
@@ -127,12 +138,14 @@ while True:
             dir = DOWNRIGHT
 
     if ball.left < 0:
+        wall.play()
         if dir == DOWNLEFT:
             dir = DOWNRIGHT
         if dir == UPLEFT:
             dir = UPRIGHT
 
     if ball.right > WIDTH:
+        wall.play()
         if dir == DOWNRIGHT:
             dir = DOWNLEFT
         if dir == UPRIGHT:
