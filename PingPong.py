@@ -11,6 +11,7 @@ root.withdraw()
 musicPlay = True
 WIDTH = 1000
 HEIGHT = 1000
+single = True
 
 window = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
 pygame.display.set_caption('Ping-Pong')
@@ -18,8 +19,6 @@ clock = pygame.time.Clock()
 
 basicFont = pygame.font.SysFont(None, 70)
 
-#mixer.music.load(tkinter.filedialog.askopenfilename())
-#mixer.music.play(-1,0.0)
 
 roket = mixer.Sound("data/roket.mp3")
 wall = mixer.Sound("data/Desk.mp3")
@@ -71,23 +70,48 @@ while True:
         if event.type == KEYDOWN:
 
             if event.key == K_LEFT:
-                player2Left = True
-                player1Left = True
+                if single:
+                    player2Left = True
+                    player1Left = True
 
             if event.key == K_RIGHT:
-                player2Right = True
-                player1Right = True
+                if single:
+                    player2Right = True
+                    player1Right = True
+
+            if event.key == K_a:
+                if single:
+                    player2Left = True
+                    player1Left = True
+
+            if event.key == K_d:
+                if single:
+                    player2Right = True
+                    player1Right = True
 
 
 
         if event.type == KEYUP:
 
             if event.key == K_LEFT:
-                player2Left = False
-                player1Left = False
+                if single:
+                    player2Left = False
+                    player1Left = False
             if event.key == K_RIGHT:
-                player2Right = False
-                player1Right = False
+                if single:
+                    player2Right = False
+                    player1Right = False
+
+            if event.key == K_a:
+                if single:
+                    player2Left = False
+                    player1Left = False
+
+            if event.key == K_d:
+                if single:
+                    player2Right = False
+                    player1Right = False
+
             if event.key == K_F1:
                 if musicPlay:
                     pygame.mixer.music.stop()
