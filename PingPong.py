@@ -10,7 +10,7 @@ root.withdraw()
 # data
 musicPlay = True
 WIDTH = 1000
-HEIGHT = 1000
+HEIGHT = 900
 typ = 'multi'
 
 window = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
@@ -54,7 +54,7 @@ score2 = 0
 
 ball = pygame.Rect(490,490,40,40)
 
-player1 = pygame.Rect(450,890,200,10)
+player1 = pygame.Rect(450,800,200,10)
 player2 = pygame.Rect(450,100,200,10)
 
 while True:
@@ -162,7 +162,7 @@ while True:
         texts = sF.render("Одиночная игра",True,RED)
         window.blit(texts,(300,100))
         texts2 = sF.render("С другом", True, GREEN)
-        window.blit(texts2, (400, 800))
+        window.blit(texts2, (400, 700))
 
     if play:
         if player1Left and player1.left > 0:
@@ -175,7 +175,7 @@ while True:
         if player2Right and player2.right < WIDTH:
             player2.left += 30
 
-    if ball.colliderect(player1):
+    if ball.colliderect(player1) and play:
         roket.play()
         if typ == 'multi':
             score1 += 1
@@ -186,7 +186,7 @@ while True:
         if dir == DOWNRIGHT:
             dir = UPRIGHT
 
-    if ball.colliderect(player2):
+    if ball.colliderect(player2) and play:
         roket.play()
         if typ == 'multi':
             score2 += 1
@@ -197,14 +197,14 @@ while True:
         if dir == UPRIGHT:
             dir = DOWNRIGHT
 
-    if ball.left < 0:
+    if ball.left < 0and play:
         wall.play()
         if dir == DOWNLEFT:
             dir = DOWNRIGHT
         if dir == UPLEFT:
             dir = UPRIGHT
 
-    if ball.right > WIDTH:
+    if ball.right > WIDTH and play:
         wall.play()
         if dir == DOWNRIGHT:
             dir = DOWNLEFT
