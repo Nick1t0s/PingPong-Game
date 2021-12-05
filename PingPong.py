@@ -48,7 +48,7 @@ BLUE = (0,0,255)
 
 backIm =  pygame.image.load('data/Background.png')
 back_r = backIm.get_rect()
-
+sF = pygame.font.SysFont('arial',60)
 score1 = 0
 score2 = 0
 
@@ -65,6 +65,11 @@ while True:
         if event.type == MOUSEBUTTONDOWN and start_game:
             play = True
             start_game = False
+            if event.pos[1] > 500:
+                typ = 'multi'
+            else:
+                typ = 'single'
+            print(typ)
         if event.type == MOUSEBUTTONDOWN and not start_game and not play and end_game:
             play = True
             end_game = False
@@ -147,11 +152,10 @@ while True:
     window.blit(backIm, back_r)
 
     if not play and start_game:
-        texts = basicFont.render("Кликните чтобы начать игру",RED,RED)
-        textsRect = texts.get_rect()
-        textsRect.centerx = window.get_rect().centerx
-        textsRect.centery = window.get_rect().centery
-        window.blit(texts,textsRect)
+        texts = sF.render("Одиночная игра",True,RED)
+        window.blit(texts,(300,100))
+        texts2 = sF.render("С другом", True, GREEN)
+        window.blit(texts2, (400, 800))
 
     if play:
         if player1Left and player1.left > 0:
