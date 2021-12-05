@@ -111,6 +111,9 @@ while True:
                     player1Right = True
                 if typ == 'multi':
                     player2Right = True
+            if event.key == K_F3:
+                pygame.quit()
+                sys.exit()
 
 
 
@@ -152,8 +155,6 @@ while True:
             if event.key == K_F2:
                 mixer.music.load(tkinter.filedialog.askopenfilename())
                 mixer.music.play(-1,0.0)
-
-
 
     window.fill((255,255,255))
     window.blit(backIm, back_r)
@@ -260,7 +261,6 @@ while True:
         pygame.draw.ellipse(window, YELLOW, ball)
         pygame.draw.rect(window,RED,player1)
         pygame.draw.rect(window, GREEN, player2)
-
 
     pygame.display.update()
     clock.tick(500)
