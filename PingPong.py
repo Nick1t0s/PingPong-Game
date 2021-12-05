@@ -71,10 +71,17 @@ while True:
                 typ = 'single'
             print(typ)
         if event.type == MOUSEBUTTONDOWN and not start_game and not play and end_game:
-            play = True
+            play = False
             end_game = False
-            pygame.quit()
-            sys.exit()
+            start_game = True
+            score = 0
+            score1 = 0
+            score2 = 0
+            ball.centerx = 500
+            ball.centery = 500
+            player1.centerx = 500
+            player2.centerx = 500
+
         if event.type == KEYDOWN:
 
             if event.key == K_LEFT:
