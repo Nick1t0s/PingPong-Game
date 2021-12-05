@@ -2,16 +2,16 @@ import pygame, sys,random,tkinter.filedialog
 from pygame.locals import *
 from pygame import mixer
 
-
+# init
 pygame.init()
 mixer.init()
 root = tkinter.Tk()
 root.withdraw()
-
+# data
 musicPlay = True
 WIDTH = 1000
 HEIGHT = 1000
-single = True
+typ = 'multi'
 
 window = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
 pygame.display.set_caption('Ping-Pong')
@@ -19,10 +19,11 @@ clock = pygame.time.Clock()
 
 basicFont = pygame.font.SysFont(None, 70)
 
-
+# sound
 roket = mixer.Sound("data/roket.mp3")
 wall = mixer.Sound("data/Desk.mp3")
 
+# type move
 DOWNLEFT = 'downleft'
 DOWNRIGHT = 'downright'
 UPLEFT = 'upleft'
@@ -30,7 +31,7 @@ UPRIGHT = 'upright'
 dir = random.choice((DOWNRIGHT,DOWNLEFT,UPRIGHT,UPLEFT))
 speed = 7
 score = 0
-
+# is move
 player1Left = False
 player1Right = False
 player2Left = False
@@ -48,6 +49,8 @@ BLUE = (0,0,255)
 backIm =  pygame.image.load('data/Background.png')
 back_r = backIm.get_rect()
 
+score1 = 0
+score2 = 0
 
 ball = pygame.Rect(490,490,40,40)
 
@@ -70,47 +73,63 @@ while True:
         if event.type == KEYDOWN:
 
             if event.key == K_LEFT:
-                if single:
+                if typ == 'single':
                     player2Left = True
+                    player1Left = True
+                if typ == 'multi':
                     player1Left = True
 
             if event.key == K_RIGHT:
-                if single:
+                if typ == 'single':
                     player2Right = True
+                    player1Right = True
+                if typ == 'multi':
                     player1Right = True
 
             if event.key == K_a:
-                if single:
+                if typ == 'single':
                     player2Left = True
                     player1Left = True
+                if typ == 'multi':
+                    player2Left = True
 
             if event.key == K_d:
-                if single:
+                if typ == 'single':
                     player2Right = True
                     player1Right = True
+                if typ == 'multi':
+                    player2Right = True
 
 
 
         if event.type == KEYUP:
 
             if event.key == K_LEFT:
-                if single:
+                if typ == 'single':
                     player2Left = False
                     player1Left = False
+                if typ == 'multi':
+                    player1Left = False
             if event.key == K_RIGHT:
-                if single:
+                if typ == 'single':
                     player2Right = False
+                    player1Right = False
+                if typ == 'multi':
                     player1Right = False
 
             if event.key == K_a:
-                if single:
+                if typ == 'single':
                     player2Left = False
                     player1Left = False
+                if typ == 'multi':
+                    player2Left = False
 
             if event.key == K_d:
-                if single:
+                if typ == 'single':
                     player2Right = False
                     player1Right = False
+                if typ == 'multi':
+                    player2Right = False
 
             if event.key == K_F1:
                 if musicPlay:
@@ -147,7 +166,10 @@ while True:
 
     if ball.colliderect(player1):
         roket.play()
-        score += 1
+        if typ == 'multi':
+            score1 += 1
+        if typ == 'single':
+            score += 1
         if dir == DOWNLEFT:
             dir = UPLEFT
         if dir == DOWNRIGHT:
@@ -155,7 +177,10 @@ while True:
 
     if ball.colliderect(player2):
         roket.play()
-        score += 1
+        if typ == 'multi':
+            score2 += 1
+        if typ == 'single':
+            score += 1
         if dir == UPLEFT:
             dir = DOWNLEFT
         if dir == UPRIGHT:
@@ -179,21 +204,31 @@ while True:
     if ball.top < 0:
         play = False
         end_game = True
-        text = basicFont.render("Счет " + str(score),RED,RED)
-        textRect = text.get_rect()
-        textRect.centerx = window.get_rect().centerx
-        textRect.centery = window.get_rect().centery
-        recRect = text.get_rect()
-        recRect.centerx = window.get_rect().centerx
-        recRect.centery = window.get_rect().centery
+        if typ == 'single':
+            text = basicFont.render("Счет " + str(score),RED,RED)
+            textRect = text.get_rect()
+            textRect.centerx = window.get_rect().centerx
+            textRect.centery = window.get_rect().centery
+        if typ == 'multi':
+            text = basicFont.render("Победил игрок 1, счёт: " + str(score1),RED,RED)
+            textRect = text.get_rect()
+            textRect.centerx = window.get_rect().centerx
+            textRect.centery = window.get_rect().centery
 
     if ball.bottom > HEIGHT:
         play = False
         end_game = True
-        text = basicFont.render("Счет " + str(score),RED,RED)
-        textRect = text.get_rect()
-        textRect.centerx = window.get_rect().centerx
-        textRect.centery = window.get_rect().centery
+        if typ == 'single':
+            text = basicFont.render("Счет " + str(score),RED,RED)
+            textRect = text.get_rect()
+            textRect.centerx = window.get_rect().centerx
+            textRect.centery = window.get_rect().centery
+        if typ == 'multi':
+            text = basicFont.render("Победил игрок 2, счёт: " + str(score2), RED, RED)
+            textRect = text.get_rect()
+            textRect.centerx = window.get_rect().centerx
+            textRect.centery = window.get_rect().centery
+
     if play == False and end_game:
         window.blit(text, textRect)
 
