@@ -88,12 +88,16 @@ while True:
                     player1Left = True
                 if typ == 'multi':
                     player1Left = True
+                if typ == 'bot':
+                    player1Left = True
 
             if event.key == K_RIGHT:
                 if typ == 'single':
                     player2Right = True
                     player1Right = True
                 if typ == 'multi':
+                    player1Right = True
+                if typ == 'bot':
                     player1Right = True
 
             if event.key == K_a:
@@ -123,11 +127,15 @@ while True:
                     player1Left = False
                 if typ == 'multi':
                     player1Left = False
+                if typ == 'bot':
+                    player1Left = False
             if event.key == K_RIGHT:
                 if typ == 'single':
                     player2Right = False
                     player1Right = False
                 if typ == 'multi':
+                    player1Right = False
+                if typ == 'bot':
                     player1Right = False
 
             if event.key == K_a:
@@ -259,6 +267,16 @@ while True:
         pygame.draw.ellipse(window, YELLOW, ball)
         pygame.draw.rect(window,RED,player1)
         pygame.draw.rect(window, GREEN, player2)
+
+    if scr == 'play' and typ == 'bot':
+        if player1Left and player1.left > 0:
+           player1.left -= 30
+        if player1Right and player1.right < WIDTH:
+            player1.left += 30
+
+        if player2.right < WIDTH or (dir in (DOWNLEFT,UPLEFT) and ball.right<740 ):
+            player2.left = ball.left
+
 
     pygame.display.update()
     clock.tick(500)
