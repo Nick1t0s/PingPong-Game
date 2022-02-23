@@ -186,7 +186,7 @@ while True:
 
     if ball.colliderect(player1) and scr =='play':
         roket.play()
-        if typ == 'multi':
+        if typ == 'multi' or typ == 'bot':
             score1 += 1
         if typ == 'single':
             score += 1
@@ -197,7 +197,7 @@ while True:
 
     if ball.colliderect(player2) and scr =='play':
         roket.play()
-        if typ == 'multi':
+        if typ == 'multi' or typ == 'bot':
             score2 += 1
         if typ == 'single':
             score += 1
@@ -233,6 +233,11 @@ while True:
             textRect = text.get_rect()
             textRect.centerx = window.get_rect().centerx
             textRect.centery = window.get_rect().centery
+        if typ == 'bot':
+            text = basicFont.render("Победил игрок, счёт: " + str(score1),RED,RED)
+            textRect = text.get_rect()
+            textRect.centerx = window.get_rect().centerx
+            textRect.centery = window.get_rect().centery
 
     if ball.bottom > HEIGHT:
         scr = 'end'
@@ -243,6 +248,11 @@ while True:
             textRect.centery = window.get_rect().centery
         if typ == 'multi':
             text = basicFont.render("Победил игрок 2, счёт: " + str(score2), RED, RED)
+            textRect = text.get_rect()
+            textRect.centerx = window.get_rect().centerx
+            textRect.centery = window.get_rect().centery
+        if typ == 'bot':
+            text = basicFont.render("Победил бот, счёт: " + str(score2), RED, RED)
             textRect = text.get_rect()
             textRect.centerx = window.get_rect().centerx
             textRect.centery = window.get_rect().centery
