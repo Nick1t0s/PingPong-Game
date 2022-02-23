@@ -9,8 +9,8 @@ root = tkinter.Tk()
 root.withdraw()
 # data
 musicPlay = True
-WIDTH = 1000
-HEIGHT = 900
+WIDTH = 900
+HEIGHT = 800
 typ = 'multi'
 
 window = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
@@ -52,7 +52,7 @@ score2 = 0
 
 ball = pygame.Rect(490,490,40,40)
 
-player1 = pygame.Rect(450,800,200,10)
+player1 = pygame.Rect(450,700,200,10)
 player2 = pygame.Rect(450,100,200,10)
 
 while True:
@@ -65,10 +65,9 @@ while True:
             if event.pos[1] > 500:
                 typ = 'multi'
             else:
-
-                
                 typ = 'single'
             print(typ)
+
         if event.type == MOUSEBUTTONDOWN and scr == 'end':
             scr = 'start'
             score = 0
@@ -160,7 +159,7 @@ while True:
         texts = sF.render("Одиночная игра",True,RED)
         window.blit(texts,(300,100))
         texts2 = sF.render("С другом", True, GREEN)
-        window.blit(texts2, (400, 700))
+        window.blit(texts2, (375, 600))
 
     if scr =='play':
         if player1Left and player1.left > 0:
