@@ -36,9 +36,7 @@ player1Left = False
 player1Right = False
 player2Left = False
 player2Right = False
-play = False
-start_game = True
-end_game = False
+scr = 'start'
 
 
 YELLOW = (255,255,0)
@@ -62,18 +60,18 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == MOUSEBUTTONDOWN and start_game:
+        if event.type == MOUSEBUTTONDOWN and scr == 'start':
             play = True
             start_game = False
             if event.pos[1] > 500:
                 typ = 'multi'
             else:
+
+                
                 typ = 'single'
             print(typ)
-        if event.type == MOUSEBUTTONDOWN and not start_game and not play and end_game:
-            play = False
-            end_game = False
-            start_game = True
+        if event.type == MOUSEBUTTONDOWN and scr == end:
+            scr = 'start'
             score = 0
             score1 = 0
             score2 = 0
@@ -159,13 +157,13 @@ while True:
     window.fill((255,255,255))
     window.blit(backIm, back_r)
 
-    if not play and start_game:
+    if scr == 'start':
         texts = sF.render("Одиночная игра",True,RED)
         window.blit(texts,(300,100))
         texts2 = sF.render("С другом", True, GREEN)
         window.blit(texts2, (400, 700))
 
-    if play:
+    if scr =='play':
         if player1Left and player1.left > 0:
            player1.left -= 30
         if player1Right and player1.right < WIDTH:
@@ -176,7 +174,7 @@ while True:
         if player2Right and player2.right < WIDTH:
             player2.left += 30
 
-    if ball.colliderect(player1) and play:
+    if ball.colliderect(player1) and scr =='play':
         roket.play()
         if typ == 'multi':
             score1 += 1
@@ -187,7 +185,7 @@ while True:
         if dir == DOWNRIGHT:
             dir = UPRIGHT
 
-    if ball.colliderect(player2) and play:
+    if ball.colliderect(player2) and scr =='play':
         roket.play()
         if typ == 'multi':
             score2 += 1
@@ -198,14 +196,14 @@ while True:
         if dir == UPRIGHT:
             dir = DOWNRIGHT
 
-    if ball.left < 0and play:
+    if ball.left < 0 and scr =='play':
         wall.play()
         if dir == DOWNLEFT:
             dir = DOWNRIGHT
         if dir == UPLEFT:
             dir = UPRIGHT
 
-    if ball.right > WIDTH and play:
+    if ball.right > WIDTH and scr =='play':
         wall.play()
         if dir == DOWNRIGHT:
             dir = DOWNLEFT
@@ -241,10 +239,10 @@ while True:
             textRect.centerx = window.get_rect().centerx
             textRect.centery = window.get_rect().centery
 
-    if play == False and end_game:
-        window.blit(text, textRect)
+#    if play == False and end_game:
+#        window.blit(text, textRect)
 
-    if play:
+    if scr =='play':
         if dir == DOWNLEFT:
             ball.left -= speed
             ball.top += speed
