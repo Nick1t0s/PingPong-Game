@@ -70,7 +70,7 @@ while True:
                 
                 typ = 'single'
             print(typ)
-        if event.type == MOUSEBUTTONDOWN and scr == end:
+        if event.type == MOUSEBUTTONDOWN and scr == 'end':
             scr = 'start'
             score = 0
             score1 = 0
