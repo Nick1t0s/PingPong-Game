@@ -61,8 +61,7 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == MOUSEBUTTONDOWN and scr == 'start':
-            play = True
-            start_game = False
+            scr = 'play'
             if event.pos[1] > 500:
                 typ = 'multi'
             else:
@@ -212,8 +211,7 @@ while True:
 
 
     if ball.top < 0:
-        play = False
-        end_game = True
+        scr = 'end'
         if typ == 'single':
             text = basicFont.render("Счет " + str(score),RED,RED)
             textRect = text.get_rect()
@@ -226,8 +224,7 @@ while True:
             textRect.centery = window.get_rect().centery
 
     if ball.bottom > HEIGHT:
-        play = False
-        end_game = True
+        scr = 'end'
         if typ == 'single':
             text = basicFont.render("Счет " + str(score),RED,RED)
             textRect = text.get_rect()
@@ -239,8 +236,8 @@ while True:
             textRect.centerx = window.get_rect().centerx
             textRect.centery = window.get_rect().centery
 
-#    if play == False and end_game:
-#        window.blit(text, textRect)
+    if scr =='end':
+        window.blit(text, textRect)
 
     if scr =='play':
         if dir == DOWNLEFT:
