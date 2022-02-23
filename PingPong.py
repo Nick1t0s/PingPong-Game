@@ -62,10 +62,12 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONDOWN and scr == 'start':
             scr = 'play'
-            if event.pos[1] > 500:
-                typ = 'multi'
-            else:
+            if event.pos[1] <= 255:
                 typ = 'single'
+            elif event.pos[1] >255 and event.pos[1] < 475:
+                typ = 'bot'
+            else:
+                typ = 'multi'
             print(typ)
 
         if event.type == MOUSEBUTTONDOWN and scr == 'end':
@@ -158,6 +160,8 @@ while True:
     if scr == 'start':
         texts = sF.render("Одиночная игра",True,RED)
         window.blit(texts,(300,100))
+        textsb = sF.render("С ботом",True,YELLOW)
+        window.blit(textsb,(375,350))
         texts2 = sF.render("С другом", True, GREEN)
         window.blit(texts2, (375, 600))
 
