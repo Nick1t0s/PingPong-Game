@@ -23,6 +23,9 @@ basicFont = pygame.font.SysFont(None, 70)
 roket = mixer.Sound("data/roket.mp3")
 wall = mixer.Sound("data/Desk.mp3")
 
+pr = 20
+s = False
+
 # type move
 DOWNLEFT = 'downleft'
 DOWNRIGHT = 'downright'
@@ -185,6 +188,12 @@ while True:
             player2.left += 30
 
     if ball.colliderect(player1) and scr =='play':
+        if s == False and random.randint(1,5) == 1:
+            s = True
+            speed = 11
+        else:
+            s = False
+            speed = 7
         roket.play()
         if typ == 'multi' or typ == 'bot':
             score1 += 1
@@ -196,6 +205,12 @@ while True:
             dir = UPRIGHT
 
     if ball.colliderect(player2) and scr =='play':
+        if s == False and random.randint(1,5) == 1:
+            s = True
+            speed = 11
+        else:
+            s = False
+            speed = 7
         roket.play()
         if typ == 'multi' or typ == 'bot':
             score2 += 1
