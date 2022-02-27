@@ -1,12 +1,20 @@
 def ult():
-    global s,speed
-    if s == False and random.randint(1, 10) == 1:
+    global s,speed,score,score1,score2
+    if (s == False and ((player1Left or player1Right) and ball.colliderect(player1))):
+        score1 += 3
+        score += 3
         s = True
-        speed = 11
+        speed = 13
+        ul.play()
+    elif (s == False and ((player2Left or player2Right) and ball.colliderect(player2))):
+        score2 += 3
+        score += 3
+        s = True
+        speed = 13
         ul.play()
     else:
         s = False
-        speed = 7
+        speed = 8
     roket.play()
 
 import pygame, sys,random,tkinter.filedialog
@@ -44,7 +52,7 @@ DOWNRIGHT = 'downright'
 UPLEFT = 'upleft'
 UPRIGHT = 'upright'
 dir = random.choice((DOWNRIGHT,DOWNLEFT,UPRIGHT,UPLEFT))
-speed = 7
+speed = 8
 score = 0
 # is move
 player1Left = False
@@ -76,6 +84,9 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == MOUSEBUTTONDOWN and scr == 'start':
+            score1 = 0
+            score2 = 0
+            score = 0
             scr = 'play'
             if event.pos[1] <= 255:
                 typ = 'single'
@@ -190,14 +201,14 @@ while True:
 
     if scr =='play':
         if player1Left and player1.left > 0:
-           player1.left -= 30
+           player1.left -= 15
         if player1Right and player1.right < WIDTH:
-            player1.left += 30
+            player1.left += 15
 
         if player2Left and player2.left > 0:
-            player2.left -= 30
+            player2.left -= 15
         if player2Right and player2.right < WIDTH:
-            player2.left += 30
+            player2.left += 15
 
     if ball.colliderect(player1) and scr =='play':
         ult()
@@ -295,9 +306,9 @@ while True:
 
     if scr == 'play' and typ == 'bot':
         if player1Left and player1.left > 0:
-           player1.left -= 30
+           player1.left -= 15
         if player1Right and player1.right < WIDTH:
-            player1.left += 30
+            player1.left += 15
 
         if player2.right < WIDTH or (dir in (DOWNLEFT,UPLEFT) and ball.right<740 ):
             player2.left = ball.left
