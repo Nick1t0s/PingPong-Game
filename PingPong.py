@@ -1,3 +1,14 @@
+def ult():
+    global s,speed
+    if s == False and random.randint(1, 10) == 1:
+        s = True
+        speed = 11
+        ul.play()
+    else:
+        s = False
+        speed = 7
+    roket.play()
+
 import pygame, sys,random,tkinter.filedialog
 from pygame.locals import *
 from pygame import mixer
@@ -22,6 +33,7 @@ basicFont = pygame.font.SysFont(None, 70)
 # sound
 roket = mixer.Sound("data/roket.mp3")
 wall = mixer.Sound("data/Desk.mp3")
+ul = mixer.Sound("data/Kiya.mp3")
 
 pr = 20
 s = False
@@ -188,13 +200,7 @@ while True:
             player2.left += 30
 
     if ball.colliderect(player1) and scr =='play':
-        if s == False and random.randint(1,5) == 1:
-            s = True
-            speed = 11
-        else:
-            s = False
-            speed = 7
-        roket.play()
+        ult()
         if typ == 'multi' or typ == 'bot':
             score1 += 1
         if typ == 'single':
@@ -205,13 +211,7 @@ while True:
             dir = UPRIGHT
 
     if ball.colliderect(player2) and scr =='play':
-        if s == False and random.randint(1,5) == 1:
-            s = True
-            speed = 11
-        else:
-            s = False
-            speed = 7
-        roket.play()
+        ult()
         if typ == 'multi' or typ == 'bot':
             score2 += 1
         if typ == 'single':
